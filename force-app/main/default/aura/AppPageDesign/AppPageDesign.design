@@ -1,8 +1,0 @@
-<design:component label="Three Region Custom App Page Template">
-    <flexipage:template>
-        <flexipage:region name="left" label="Left Region" defaultWidth="SMALL" />
-        <flexipage:region name="main" label="Right Region" defaultWidth="MEDIUM" />
-        <flexipage:region name="right" label="Right Region" defaultWidth="SMALL" />
-        <flexipage:region name="footer" label="Footer Region" defaultWidth="LARGE" />
-    </flexipage:template>
-</design:component>
