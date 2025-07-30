@@ -1,0 +1,67 @@
+<template>
+  <div style="border:solid 1px #cbcbcb;border-radius: 5px;padding-right:1%;padding-left:1%;padding-top:1%" >
+    <lightning-card >
+        <h3 slot="title" style="background-color:#f3f3f3;width:100%">
+          
+          <!--
+          <div style="padding-right:3%"> <lightning-icon icon-name="standard:file" size="x-small"> </lightning-icon> </div>
+          <div> Files </div>
+        -->
+          <div class="slds-grid slds-wrap">
+                     
+
+            <div class="slds-col slds-size_3-of-10">
+              <lightning-icon icon-name="standard:file" size="small"> </lightning-icon> 
+            </div>
+            <div class="slds-col slds-size_7-of-10" style="padding-left:5px">
+              Files
+            </div>
+
+          </div>
+
+        </h3>
+
+         <template for:each={filesList} for:item="file">
+             <div key={file.value} class="slds-box">
+                 <div class="slds-grid slds-wrap">
+                     
+                     <div class="slds-media__figure">
+                      <lightning-icon icon-name={file.IconName} size='medium' ></lightning-icon>
+                     </div>
+<!--
+                     <div class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12">
+                       <a  data-id={file.Link} onclick={previewHandler}>{file.Title}</a><br/>
+                       {file.CreatedDate} {file.Size}B {file.Extension} 
+                     </div>
+                   -->
+                     
+                     <div class="slds-grid" style="width:100%">
+                          <div class="slds-col slds-size_10-of-12">
+                            <a  data-id={file.Link} onclick={previewHandler}>{file.Title}</a><br/>
+                            {file.CreatedDate} {file.Size}B {file.Extension} 
+                          </div>
+                          <div class="slds-col slds-size_2-of-12">
+                            <span style="display: flex; justify-content: flex-end" ><lightning-icon icon-name="utility:delete" alternative-text="Delete File" title="Delete File" size="x-small" style="cursor:pointer" value={file.Id} onclick={onRemoveFileClicked}></lightning-icon></span>
+                          </div>
+                    </div>
+                    
+
+                   </div>
+             </div>
+         </template>
+         <br/>
+
+         <lightning-file-upload
+          name="fileUploader"
+          class="file-selector-large"
+          label="The text label for the file uploader"
+          title="The tooltip for the file uploader"
+          onuploadfinished={handleUploadFinished}
+          multiple
+        >
+        </lightning-file-upload>
+
+    </lightning-card> 
+  </div>
+    
+ </template>

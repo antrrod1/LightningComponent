@@ -1,0 +1,119 @@
+<template>
+    <lightning-card >
+        
+        <div class="slds-m-around-small">
+
+
+            <template lwc:if={recordRetrieved}>
+                
+                <lightning-progress-indicator current-step={currentStatus} type="path" variant="base" lwc:ref="progressBar">
+                    <lightning-progress-step onclick={stepPressedEng} label="New" value="New"></lightning-progress-step>
+                    <lightning-progress-step onclick={stepPressedEng} label="Queue" value="Queue"></lightning-progress-step>
+                    <lightning-progress-step onclick={stepPressedEng} label="In Progress" value="In Progress"></lightning-progress-step>
+                    <lightning-progress-step onclick={stepPressedEng} label="On Hold" value="On Hold"></lightning-progress-step>
+                    <lightning-progress-step onclick={stepPressedEng} label="Revision" value="Revision"></lightning-progress-step>
+                    <lightning-progress-step onclick={stepPressedEng} label="Completed" value="Completed"></lightning-progress-step>
+                </lightning-progress-indicator>
+                <br/>
+
+                <template lwc:if={editMode}>
+                <lightning-record-edit-form object-api-name="Engineering__c" record-id={engineeringId} layout-type="Full" mode="edit" columns="2" lwc:ref="engineeringEditForm"  >
+
+                    <lightning-output-field field-name="Name" > </lightning-output-field>
+                    <lightning-input-field field-name="Engineer__c" > </lightning-input-field>
+                    <lightning-input-field field-name="Calculation_Type__c" > </lightning-input-field>
+                    <lightning-input-field field-name="Design__c" > </lightning-input-field>
+                    <lightning-input-field field-name="Opportunity__c" > </lightning-input-field>
+                    <lightning-input-field field-name="Due_Date__c" > </lightning-input-field>
+                
+                </lightning-record-edit-form>
+
+                <div class="slds-var-m-top_medium">
+                    <lightning-button variant="neutral" type="cancel" label="Cancel" style="margin: 1em;" onclick={exitEditMode}>
+                    </lightning-button>
+                    <lightning-button variant="brand" type="submit" label="Save" onclick={submitEngineering}>
+                    </lightning-button>
+                </div>
+            </template>
+            <template lwc:else>
+                <lightning-record-view-form object-api-name="Engineering__c" record-id={engineeringId} layout-type="Full" mode="view" columns="2">
+                    
+                    <div class="slds-col slds-size_1-of-2" style="border-bottom: 1px solid #f3f3f3">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_10-of-12">
+                              <span><a href={recordUrl} style="cursor:pointer;">
+                                <lightning-output-field field-name="Name" ></lightning-output-field>
+                              </a></span>
+                            </div>
+                            <div class="slds-col slds-size_2-of-12">
+                              <span style="display: flex; justify-content: flex-end" ><lightning-icon icon-name="utility:edit" alternative-text="Edit Record" title="Edit Record" size="x-small" onclick={enterEditMode} style="cursor:pointer"></lightning-icon></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2" style="border-bottom: 1px solid #f3f3f3">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_10-of-12">
+                              <span><lightning-output-field field-name="Engineer__c" ></lightning-output-field></span>
+                            </div>
+                            <div class="slds-col slds-size_2-of-12">
+                              <span style="display: flex; justify-content: flex-end" ><lightning-icon icon-name="utility:edit" alternative-text="Edit Record" title="Edit Record" size="x-small" onclick={enterEditMode} style="cursor:pointer"></lightning-icon></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2" style="border-bottom: 1px solid #f3f3f3">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_10-of-12">
+                              <span><lightning-output-field field-name="Calculation_Type__c" ></lightning-output-field></span>
+                            </div>
+                            <div class="slds-col slds-size_2-of-12">
+                              <span style="display: flex; justify-content: flex-end" ><lightning-icon icon-name="utility:edit" alternative-text="Edit Record" title="Edit Record" size="x-small" onclick={enterEditMode} style="cursor:pointer"></lightning-icon></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2" style="border-bottom: 1px solid #f3f3f3">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_10-of-12">
+                              <span><lightning-output-field field-name="Design__c" ></lightning-output-field></span>
+                            </div>
+                            <div class="slds-col slds-size_2-of-12">
+                              <span style="display: flex; justify-content: flex-end" ><lightning-icon icon-name="utility:edit" alternative-text="Edit Record" title="Edit Record" size="x-small" onclick={enterEditMode} style="cursor:pointer"></lightning-icon></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2" style="border-bottom: 1px solid #f3f3f3">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_10-of-12">
+                              <span><lightning-output-field field-name="Opportunity__c" ></lightning-output-field></span>
+                            </div>
+                            <div class="slds-col slds-size_2-of-12">
+                              <span style="display: flex; justify-content: flex-end" ><lightning-icon icon-name="utility:edit" alternative-text="Edit Record" title="Edit Record" size="x-small" onclick={enterEditMode} style="cursor:pointer"></lightning-icon></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2" style="border-bottom: 1px solid #f3f3f3">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_10-of-12">
+                              <span><lightning-output-field field-name="Due_Date__c" ></lightning-output-field></span>
+                            </div>
+                            <div class="slds-col slds-size_2-of-12">
+                              <span style="display: flex; justify-content: flex-end" ><lightning-icon icon-name="utility:edit" alternative-text="Edit Record" title="Edit Record" size="x-small" onclick={enterEditMode} style="cursor:pointer"></lightning-icon></span>
+                            </div>
+                        </div>
+                    </div>                    
+
+
+                </lightning-record-view-form>
+            </template>
+
+            </template>
+
+
+        </div>
+        
+    </lightning-card>
+</template>

@@ -1,0 +1,26 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+    <!-- Attributes definition -->
+    <aura:attribute name="column1" type="Aura.Component[]" default="[]" description="Content for the first column"/>
+    <aura:attribute name="column2" type="Aura.Component[]" default="[]" description="Content for the second column"/>
+    <aura:attribute name="column3" type="Aura.Component[]" default="[]" description="Content for the third column"/>
+    <aura:attribute name="fullRow" type="Aura.Component[]" default="[]" description="Content for the full-width row"/>
+
+    <!-- Layout definition -->
+    <div class="slds-grid slds-wrap">
+        <!-- Top Row with 3 Columns -->
+        <div class="slds-col slds-size_1-of-3">
+            {!v.column1}
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+            {!v.column2}
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+            {!v.column3}
+        </div>
+
+        <!-- Bottom Full-width Row -->
+        <div class="slds-col slds-size_1-of-1">
+            {!v.fullRow}
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,24 @@
+<aura:component implements="lightning:homeTemplate" description="Custom App Template">
+    <aura:attribute name ="left" type="Aura.component[]" description = "Left region" />
+    <aura:attribute name ="right" type="Aura.component[]" description = "Right region" />
+    <aura:attribute name ="main" type="Aura.component[]" description = "Main region" />
+    <aura:attribute name ="footer" type="Aura.component[]" description = "Footer region" />
+
+    <div>
+
+        <lightning:layout>
+            <lightning:layoutItem size="4">
+                {!v.left}
+            </lightning:layoutItem> 
+            <lightning:layoutItem size="4">
+                {!v.main}
+            </lightning:layoutItem> 
+            <lightning:layoutItem size="4">
+                {!v.right}
+            </lightning:layoutItem> 
+        </lightning:layout>
+        <div>{!v.footer}</div>
+    </div>
+
+
+</aura:component>

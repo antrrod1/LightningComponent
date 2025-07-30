@@ -1,0 +1,64 @@
+<template>
+
+    <div class="slds-panel slds-size_large  slds-is-open" style="width: 100%;">
+        <lightning-accordion allow-multiple-sections-open active-section-name={activeSection} >
+            
+            <lightning-accordion-section name="DesignHistory" label="Design History" 
+            style="border:solid 1px #cbcbcb;border-radius: 5px;">
+                <template lwc:if={designHistoryRetrieved}>
+                
+                  <div class="slds-scrollable" style="height:200px;overflow:auto">
+                  <template for:each={designHistoryRecords} for:item="recordHistory">
+                    
+                    <lightning-card key={recordHistory.changeDate} title={recordHistory.changedBy} icon-name="action:user" style="padding-top:5%;padding-bottom:5%">
+
+                      <p class="slds-text-body_small" style="padding-bottom:2%">
+                        <a class="slds-text-link_reset">{recordHistory.changeDate}</a>
+                      </p>
+                      
+                      <template for:each={recordHistory.items} for:item="recordHistoryChange">
+                        <p key={recordHistoryChange.field}>
+                            <b>{recordHistoryChange.field}</b> changed from <b>{recordHistoryChange.valueOld}</b> to <b>{recordHistoryChange.valueNew}</b>
+                        </p>
+                      </template>
+                      
+                    </lightning-card>
+                    
+                  </template>
+                  </div>
+
+                </template>
+            </lightning-accordion-section >
+
+            <lightning-accordion-section name="EngineeringHistory" label="Engineering History" 
+            style="border:solid 1px #cbcbcb;border-radius: 5px;">
+                <template lwc:if={engineeringHistoryRetrieved}>
+
+                <div class="slds-scrollable" style="height:200px;overflow:auto">
+                  <template for:each={engineeringHistoryRecords} for:item="recordHistory">
+                    
+                    <lightning-card key={recordHistory.changeDate} title={recordHistory.changedBy} icon-name="action:user" style="padding-top:5%;padding-bottom:5%">
+
+                      <p class="slds-text-body_small" style="padding-bottom:2%">
+                        <a class="slds-text-link_reset">{recordHistory.changeDate}</a>
+                      </p>
+                      
+                      <template for:each={recordHistory.items} for:item="recordHistoryChange">
+                        <p key={recordHistoryChange.field}>
+                            <b>{recordHistoryChange.field}</b> changed from <b>{recordHistoryChange.valueOld}</b> to <b>{recordHistoryChange.valueNew}</b>
+                        </p>
+                      </template>
+                      
+                    </lightning-card>
+                    
+                  </template>
+                  </div>
+
+
+                </template>
+            </lightning-accordion-section >
+
+        </lightning-accordion>    
+</div>
+
+</template>
